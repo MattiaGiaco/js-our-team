@@ -29,6 +29,7 @@ const members = [
 ]
 
 let html = '';
+const btnAdd = document.getElementById('addMemberButton')
 
 // creo un ciclo per leggere gli oggetti
 for(let index in members){
@@ -56,6 +57,25 @@ for(let index in members){
 document.querySelector('.team-container').innerHTML = html
    
 
+btnAdd.addEventListener('click', function(){
+  const newName = document.getElementById('name');
+  const newRole = document.getElementById('role');
+  const newImage = document.getElementById('image');
+
+  const addName = newName.value;
+  const addRole = newRole.value;
+  const addImage = newImage.value;
+
+  members.push(
+    {
+      'nome': addName,
+      'ruolo': addRole,
+      'foto': addImage
+    }
+  )
+
+  document.querySelector('.team-container').innerHTML = html
+})
 
 // function memberStamp(){
 //   teamContiner.innerHTML = '';
