@@ -28,54 +28,80 @@ const members = [
   }
 ]
 
-let html = '';
-const btnAdd = document.getElementById('addMemberButton')
+const btnAdd = document.getElementById('addMemberButton');
+btnAdd.addEventListener('click', addNewMember);
+
+drawMember();
 
 // creo un ciclo per leggere gli oggetti
-for(let index in members){
-  const member = members[index];
+// for(let index in members){
+//   const member = members[index];
 
-  const nome = member.nome;
-  const ruolo = member.ruolo;
-  const foto = member.foto;
+//   const nome = member.nome;
+//   const ruolo = member.ruolo;
+//   const foto = member.foto;
 
-  // creo html
-  html +=`
-     <div class="team-card">
-       <div class="card-image">
-         <img src="${foto}"/>
-       </div>
-       <div class="card-text">
-         <h3>${nome}</h3>
-         <p>${ruolo}</p>
-       </div>
-     </div>    
-    `;
+//   // creo html
+//   html +=`
+//      <div class="team-card">
+//        <div class="card-image">
+//          <img src="${foto}"/>
+//        </div>
+//        <div class="card-text">
+//          <h3>${nome}</h3>
+//          <p>${ruolo}</p>
+//        </div>
+//      </div>    
+//     `;
+// }
+
+function drawMember(){
+  document.querySelector('.team-container').innerHTML = '';
+
+  for(let member of members){
+    createMember(member);
+  }
 }
 
-// stampo html
-document.querySelector('.team-container').innerHTML = html
+function createMember(member){
+  const teamContainer = document.querySelector('.team-container');
+
+  let prevContent = teamContainer.innerHTML;
+  const {nome, ruolo, foto} = member;
+
+  prevContent +=
+  `
+    <div class="team-card">
+      <div class="card-image">
+        <img
+          src="${foto}"
+          alt="${nome}"
+        />
+      </div>
+      <div class="card-text">
+        <h3>${nome}</h3>
+        <p>${ruolo}</p>
+      </div>
+    </div>
+  `;
+
+  teamContainer.innerHTML = prevContent;
+}
    
 
-btnAdd.addEventListener('click', function(){
-  const newName = document.getElementById('name');
-  const newRole = document.getElementById('role');
-  const newImage = document.getElementById('image');
+function addNewMember(){
+  const nome = document.getElementById('name').value;
+  const ruolo = document.getElementById('role').value;
+  const foto = document.getElementById('image').value;
 
-  const addName = newName.value;
-  const addRole = newRole.value;
-  const addImage = newImage.value;
-
-  members.push(
-    {
-      'nome': addName,
-      'ruolo': addRole,
-      'foto': addImage
-    }
-  )
-
-  document.querySelector('.team-container').innerHTML = html
-})
+  const newMember = {
+    nome: nome,
+    ruolo: ruolo,
+    foto: foto
+  }
+  
+  drawMember(newMember)
+}
 
 // function memberStamp(){
 //   teamContiner.innerHTML = '';
