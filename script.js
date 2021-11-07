@@ -26,10 +26,10 @@ const members = [
     ruolo: 'Office manager',
     foto: 'img/walter-gordon-office-manager.jpg'
   }
-]
+];
 
 const btnAdd = document.getElementById('addMemberButton');
-btnAdd.addEventListener('click', addNewMember);
+btnAdd.addEventListener('click',addNewMember);
 
 drawMember();
 
@@ -100,7 +100,7 @@ function addNewMember(){
     foto: foto
   }
   
-  drawMember(newMember)
+  createMember(newMember)
 }
 
 // function memberStamp(){
